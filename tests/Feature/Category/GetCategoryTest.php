@@ -17,7 +17,7 @@ it('should return a single category', function () {
         ->attributes->slug->toBe('house-tools');
 });
 
-it('should return not found if category does not exist', function () {
+it('should return 404 if category not found', function () {
     getJson(route('categories.show', ['category' => 1]))
         ->assertNotFound();
 });

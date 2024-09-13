@@ -4,6 +4,25 @@ use App\Models\Product;
 
 use function Pest\Laravel\getJson;
 
+it('should get a single product by id', function () {
+    $tShirt = Product::factory([
+        'name' => 'Tshirt',
+        'description' => 'Oversize Tshirt',
+    ])->create();
+
+    $product = getJson(route('products.show', ['product' => $tShirt]))
+        ->json('data');
+
+    expect($product)
+        ->attributes->name->toBe('Tshirt')
+        ->attributes->description->toBe('Oversize Tshirt');
+});
+
+it('should return 404 if product not found', function () {
+    getJson(route('products.show', ['product' => 1]))
+        ->assertNotFound();
+});
+
 it('should get all products', function () {
     Product::factory()->count(5)->create();
 
@@ -24,9 +43,8 @@ it('should filter products', function () {
             'name' => 'shirt',
         ],
     ]))
-        // ->dd();
         ->json('data');
 
     expect($products)->toHaveCount(1);
-    // expect($products[0])->attributes->id->toBe($tshirt->uuid);
+    expect($products[0])->id->toBe($tshirt->uuid);
 });
