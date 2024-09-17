@@ -2,27 +2,29 @@
 
 namespace App\Models;
 
-use App\Traits\HasSlug;
 use App\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Category extends Model
+class Subcategory extends Model
 {
     use HasFactory;
-    use HasSlug;
     use HasUuid;
 
     protected $fillable = [
         'uuid',
+        'category_id',
         'name',
-        'slug',
         'is_active',
     ];
 
     protected $attributes = [
-        'is_active' => false,
+        'is_active' => 0,
+    ];
+
+    protected $cast = [
+        'category_id' => 'integer',
     ];
 
     public function getRouteKeyName(): string
@@ -30,8 +32,8 @@ class Category extends Model
         return 'uuid';
     }
 
-    public function subCategories(): HasMany
+    public function category(): BelongsTo
     {
-        return $this->hasMany(Subcategory::class);
+        return $this->belongsTo(Category::class);
     }
 }

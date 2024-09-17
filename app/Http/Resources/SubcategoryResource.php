@@ -5,13 +5,13 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use TiMacDonald\JsonApi\JsonApiResource;
 
-class CategoryResource extends JsonApiResource
+class SubcategoryResource extends JsonApiResource
 {
     public function toAttributes(Request $request): array
     {
         return [
+            'categoryId' => $this->category_id,
             'name' => $this->name,
-            'slug' => $this->slug,
             'isActive' => $this->is_active,
         ];
     }
@@ -19,7 +19,7 @@ class CategoryResource extends JsonApiResource
     public function toRelationships(Request $request): array
     {
         return [
-            'subCategories' => fn () => SubcategoryResource::collection($this->subCategories),
+            'category' => fn () => CategoryResource::make($this->category),
         ];
     }
 }

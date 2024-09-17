@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Actions\UpserCategoryAction;
 use App\Data\CategoryData;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\UpsertCategoryRequest;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
@@ -22,6 +23,7 @@ class CategoryController extends Controller
     {
         $categories = QueryBuilder::for(Category::class)
             ->allowedFilters(['name'])
+            ->allowedIncludes(['subCategories'])
             ->get();
 
         return CategoryResource::collection($categories);
@@ -42,6 +44,10 @@ class CategoryController extends Controller
      */
     public function show(Category $category): CategoryResource
     {
+        $category = QueryBuilder::for(Category::class)
+            ->allowedIncludes(['subCategories'])
+            ->findOrFail($category->id);
+
         return CategoryResource::make($category);
     }
 

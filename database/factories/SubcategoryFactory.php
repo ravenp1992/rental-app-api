@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Subcategory>
  */
-class CategoryFactory extends Factory
+class SubcategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,12 +17,10 @@ class CategoryFactory extends Factory
      */
     public function definition(): array
     {
-        $name = $this->faker->name;
-
         return [
             'uuid' => $this->faker->uuid,
-            'name' => $name,
-            'slug' => Str::slug($name),
+            'category_id' => Category::factory(),
+            'name' => $this->faker->name,
             'is_active' => $this->faker->randomElement([1, 0]),
         ];
     }

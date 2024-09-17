@@ -1,15 +1,24 @@
 <?php
 
 use App\Models\Category;
+use App\Models\Subcategory;
 
 use function Pest\Laravel\getJson;
 
-it('should return a single category', function () {
+it('should return a category', function () {
     $houseTool = Category::factory([
         'name' => 'House Tools',
     ])->create();
 
-    $category = getJson(route('categories.show', ['category' => $houseTool]))
+    Subcategory::factory([
+        'category_id' => $houseTool->id,
+    ])->count(5)->create();
+
+    $category = getJson(
+        route('categories.show', [
+            'category' => $houseTool,
+        ])
+    )
         ->json('data');
 
     expect($category)

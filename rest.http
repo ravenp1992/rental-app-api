@@ -1,0 +1,11 @@
+GET http://localhost:8000/api/categories
+
+###
+GET http://localhost:8000/api/categories/9f36fe1d-16fb-424b-9ebc-4c66e0fa0c8a
+
+
+###
+GET http://localhost:8000/api/subcategories?includes=category
+
+###
+GET http://localhost:8000/api/subcategories/258f3f23-13ce-46be-99e5-7f5b412fef45
