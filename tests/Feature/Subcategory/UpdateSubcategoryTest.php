@@ -1,10 +1,16 @@
 <?php
 
-use App\Models\Category;
-use App\Models\Subcategory;
+use App\Models\User;
+use Domains\Category\Models\Category;
+use Domains\Subcategory\Models\Subcategory;
 
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\putJson;
+
+beforeEach(function () {
+    $user = User::factory()->create();
+    $this->actingAs($user);
+});
 
 it('should update subcategory', function (string $name, int $isActive) {
     $category = Category::factory()->create();

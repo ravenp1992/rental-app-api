@@ -1,9 +1,15 @@
 <?php
 
-use App\Models\Category;
+use App\Models\User;
+use Domains\Category\Models\Category;
 use Illuminate\Http\Response;
 
 use function Pest\Laravel\postJson;
+
+beforeEach(function () {
+    $user = User::factory()->create();
+    $this->actingAs($user);
+});
 
 it('should return 422 if categoryId is missing', function () {
     postJson(route('subcategories.store'), [

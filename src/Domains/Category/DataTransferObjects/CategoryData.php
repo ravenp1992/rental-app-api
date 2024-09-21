@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Data;
+namespace Domains\Category\DataTransferObjects;
 
 use App\Http\Requests\UpsertCategoryRequest;
 

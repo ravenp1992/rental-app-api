@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Actions\UpsertSubcategoryAction;
-use App\Data\SubcategoryData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpsertSubcategoryRequest;
 use App\Http\Resources\SubcategoryResource;
-use App\Models\Subcategory;
+use Domains\Subcategory\Actions\UpsertSubcategoryAction;
+use Domains\Subcategory\DataTransferObjects\SubcategoryData;
+use Domains\Subcategory\Models\Subcategory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Spatie\QueryBuilder\QueryBuilder;

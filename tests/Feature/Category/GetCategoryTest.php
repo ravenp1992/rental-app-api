@@ -1,9 +1,15 @@
 <?php
 
-use App\Models\Category;
-use App\Models\Subcategory;
+use App\Models\User;
+use Domains\Category\Models\Category;
+use Domains\Subcategory\Models\Subcategory;
 
 use function Pest\Laravel\getJson;
+
+beforeEach(function () {
+    $user = User::factory()->create();
+    $this->actingAs($user);
+});
 
 it('should return a category', function () {
     $houseTool = Category::factory([

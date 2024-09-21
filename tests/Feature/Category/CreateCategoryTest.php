@@ -1,8 +1,14 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Http\Response;
 
 use function Pest\Laravel\postJson;
+
+beforeEach(function () {
+    $user = User::factory()->create();
+    $this->actingAs($user);
+});
 
 it('should return a 422 if name is missing', function () {
     postJson(route('categories.store'), [

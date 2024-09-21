@@ -17,6 +17,7 @@ class ProductResource extends JsonApiResource
             'deposit' => $this->deposit,
             'stockQuantity' => $this->stock_quantity,
             'status' => $this->status,
+            'publishedAt' => $this->published_at,
         ];
     }
 }

@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Actions\UpsertProductAction;
-use App\Data\ProductData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GetProductRequest;
 use App\Http\Requests\UpsertProductRequest;
 use App\Http\Resources\ProductResource;
-use App\Models\Product;
-use Illuminate\Database\Eloquent\Builder;
+use Domains\Product\Actions\UpsertProductAction;
+use Domains\Product\DataTransferObjects\ProductData;
+use Domains\Product\Models\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -23,20 +22,6 @@ class ProductController extends Controller
      */
     public function index(GetProductRequest $request)
     {
-        /* Manual */
-        // $nameFilter = $request->input('filter.name');
-        // $results =
-        //     Product::query()
-        //         ->when(
-        //             $nameFilter,
-        //             fn (Builder $query) => $query->where('name', 'LIKE', "%$nameFilter%")
-        //         )
-        //         ->get();
-
-        // return ProductResource::collection($results);
-
-        /* Using spatie laravel-query-builder package */
-
         $products = QueryBuilder::for(Product::class)
             ->allowedFilters(['name'])
             ->get();
@@ -78,6 +63,13 @@ class ProductController extends Controller
     public function destroy(Product $product): Response
     {
         $product->delete();
+
+        return response()->noContent();
+    }
+
+    public function publish(Product $product): Response
+    {
+        $product->publish();
 
         return response()->noContent();
     }

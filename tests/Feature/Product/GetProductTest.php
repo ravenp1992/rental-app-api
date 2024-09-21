@@ -1,8 +1,14 @@
 <?php
 
-use App\Models\Product;
+use App\Models\User;
+use Domains\Product\Models\Product;
 
 use function Pest\Laravel\getJson;
+
+beforeEach(function () {
+    $user = User::factory()->create();
+    $this->actingAs($user);
+});
 
 it('should get a single product by id', function () {
     $tShirt = Product::factory([

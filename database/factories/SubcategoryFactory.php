@@ -2,14 +2,14 @@
 
 namespace Database\Factories;
 
-use App\Models\Category;
+use Domains\Category\Models\Category;
+use Domains\Subcategory\Models\Subcategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Subcategory>
- */
 class SubcategoryFactory extends Factory
 {
+    protected $model = Subcategory::class;
+
     /**
      * Define the model's default state.
      *

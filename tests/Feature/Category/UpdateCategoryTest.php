@@ -1,8 +1,14 @@
 <?php
 
-use App\Models\Category;
+use App\Models\User;
+use Domains\Category\Models\Category;
 
 use function Pest\Laravel\putJson;
+
+beforeEach(function () {
+    $user = User::factory()->create();
+    $this->actingAs($user);
+});
 
 it('it should return an updated category', function (string $name, int $isActive) {
     $category = Category::factory([

@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
-use App\Models\Subcategory;
+use Domains\Category\Models\Category;
+use Domains\Subcategory\Models\Subcategory;
 use Illuminate\Database\Seeder;
 
 class SubcategorySeeder extends Seeder

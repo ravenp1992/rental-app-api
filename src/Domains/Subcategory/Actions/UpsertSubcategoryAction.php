@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Actions;
+namespace Domains\Subcategory\Actions;
 
-use App\Data\SubcategoryData;
-use App\Models\Subcategory;
+use Domains\Subcategory\DataTransferObjects\SubcategoryData;
+use Domains\Subcategory\Models\Subcategory;
 
 class UpsertSubcategoryAction
 {

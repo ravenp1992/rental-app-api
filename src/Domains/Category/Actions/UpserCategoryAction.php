@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Actions;
+namespace Domains\Category\Actions;
 
-use App\Data\CategoryData;
-use App\Models\Category;
+use Domains\Category\DataTransferObjects\CategoryData;
+use Domains\Category\Models\Category;
 
 class UpserCategoryAction
 {

@@ -1,9 +1,13 @@
 <?php
 
-namespace App\Models;
+namespace Domains\Category\Models;
 
 use App\Traits\HasSlug;
 use App\Traits\HasUuid;
+use Database\Factories\CategoryFactory;
+use Domains\Product\Models\Product;
+use Domains\Subcategory\Models\Subcategory;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -30,8 +34,18 @@ class Category extends Model
         return 'uuid';
     }
 
+    protected static function newFactory(): Factory
+    {
+        return CategoryFactory::new();
+    }
+
     public function subCategories(): HasMany
     {
         return $this->hasMany(Subcategory::class);
+    }
+
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class);
     }
 }

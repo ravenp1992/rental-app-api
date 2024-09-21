@@ -1,8 +1,15 @@
 <?php
 
+use App\Models\User;
+use Domains\Category\Models\Category;
 use Illuminate\Http\Response;
 
 use function Pest\Laravel\postJson;
+
+beforeEach(function () {
+    $user = User::factory()->create();
+    $this->actingAs($user);
+});
 
 it('should return a 422 if name is missing', function () {
     postJson(route('products.store'), [
@@ -18,8 +25,16 @@ it('should return a 422 if deposit is missing', function () {
     ])->assertInvalid(['deposit']);
 });
 
+it('should return a 422 if categoryId is missing', function () {
+    postJson(route('products.store'), [
+        'name' => 'Demo',
+        'deposit' => 1000,
+    ])->assertInvalid(['categoryId']);
+});
+
 it('should create a product', function () {
     $product = postJson(route('products.store'), [
+        'categoryId' => Category::factory()->create()->uuid,
         'name' => 'Demo',
         'description' => 'Demo description',
         'rentPrice' => 10 * 100,

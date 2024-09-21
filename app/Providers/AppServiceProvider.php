@@ -24,6 +24,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Model::shouldBeStrict(App::isLocal());
 
-        JsonApiResource::resolveIdUsing(fn(Model $model) => $model->uuid);
+        JsonApiResource::resolveIdUsing(fn (Model $model) => $model->uuid);
     }
 }

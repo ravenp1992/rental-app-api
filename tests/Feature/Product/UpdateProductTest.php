@@ -1,12 +1,22 @@
 <?php
 
-use App\Models\Product;
+use App\Models\User;
+use Domains\Category\Models\Category;
+use Domains\Product\Models\Product;
 
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\putJson;
 
+beforeEach(function () {
+    $user = User::factory()->create();
+    $this->actingAs($user);
+});
+
 it('should update a product', function () {
+    $category = Category::factory()->create();
+
     $product = Product::factory([
+        'category_id' => $category->id,
         'name' => 'Demo',
         'description' => 'Demo Product',
         'rent_price' => 10 * 100,
@@ -15,6 +25,7 @@ it('should update a product', function () {
     ])->create();
 
     putJson(route('products.update', ['product' => $product]), [
+        'categoryId' => $category->uuid,
         'name' => 'Updated Name',
         'description' => 'Demo Product',
         'rentPrice' => 10 * 100,

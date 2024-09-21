@@ -2,14 +2,15 @@
 
 namespace Database\Factories;
 
-use App\Enums\ProductStatus;
+use Domains\Category\Models\Category;
+use Domains\Product\Enums\ProductStatus;
+use Domains\Product\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
- */
 class ProductFactory extends Factory
 {
+    protected $model = Product::class;
+
     /**
      * Define the model's default state.
      *
@@ -20,6 +21,7 @@ class ProductFactory extends Factory
         $isForSale = (bool) rand(0, 1);
 
         return [
+            'category_id' => Category::factory(),
             'name' => $this->faker->name,
             'description' => $this->faker->text,
             'rent_price' => rand(10, 100) * 100,

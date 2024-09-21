@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Data;
+namespace Domains\Subcategory\DataTransferObjects;
 
 use App\Http\Requests\UpsertSubcategoryRequest;
-use App\Models\Category;
+use Domains\Category\Models\Category;
 
 class SubcategoryData
 {
