@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\GetProductRequest;
 use App\Http\Requests\UpsertProductRequest;
 use App\Http\Resources\ProductResource;
+use Domains\Product\Actions\PublishProductAction;
 use Domains\Product\Actions\UpsertProductAction;
 use Domains\Product\DataTransferObjects\ProductData;
 use Domains\Product\Models\Product;
@@ -20,7 +20,7 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(GetProductRequest $request)
+    public function index()
     {
         $products = QueryBuilder::for(Product::class)
             ->allowedFilters(['name'])
@@ -67,9 +67,9 @@ class ProductController extends Controller
         return response()->noContent();
     }
 
-    public function publish(Product $product): Response
+    public function publish(Product $product, PublishProductAction $publishProductAction): Response
     {
-        $product->publish();
+        $publishProductAction->execute($product);
 
         return response()->noContent();
     }

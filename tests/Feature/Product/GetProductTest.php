@@ -1,32 +1,34 @@
 <?php
 
-use App\Models\User;
 use Domains\Product\Models\Product;
+use Domains\User\Models\User;
 
 use function Pest\Laravel\getJson;
 
-beforeEach(function () {
-    $user = User::factory()->create();
-    $this->actingAs($user);
-});
+describe('Products', function () {
+    beforeEach(function () {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+    });
 
-it('should get a single product by id', function () {
-    $tShirt = Product::factory([
-        'name' => 'Tshirt',
-        'description' => 'Oversize Tshirt',
-    ])->create();
+    it('should get a single product by id', function () {
+        $tShirt = Product::factory([
+            'name' => 'Tshirt',
+            'description' => 'Oversize Tshirt',
+        ])->create();
 
-    $product = getJson(route('products.show', ['product' => $tShirt]))
-        ->json('data');
+        $product = getJson(route('products.show', ['product' => $tShirt]))
+            ->json('data');
 
-    expect($product)
-        ->attributes->name->toBe('Tshirt')
-        ->attributes->description->toBe('Oversize Tshirt');
-});
+        expect($product)
+            ->attributes->name->toBe('Tshirt')
+            ->attributes->description->toBe('Oversize Tshirt');
+    });
 
-it('should return 404 if product not found', function () {
-    getJson(route('products.show', ['product' => 1]))
-        ->assertNotFound();
+    it('should return 404 if product not found', function () {
+        getJson(route('products.show', ['product' => 1]))
+            ->assertNotFound();
+    });
 });
 
 it('should get all products', function () {

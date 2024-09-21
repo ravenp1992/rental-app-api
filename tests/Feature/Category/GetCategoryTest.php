@@ -1,40 +1,42 @@
 <?php
 
-use App\Models\User;
 use Domains\Category\Models\Category;
 use Domains\Subcategory\Models\Subcategory;
+use Domains\User\Models\User;
 
 use function Pest\Laravel\getJson;
 
-beforeEach(function () {
-    $user = User::factory()->create();
-    $this->actingAs($user);
-});
+describe('Category', function () {
+    beforeEach(function () {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+    });
 
-it('should return a category', function () {
-    $houseTool = Category::factory([
-        'name' => 'House Tools',
-    ])->create();
+    it('should return a category', function () {
+        $houseTool = Category::factory([
+            'name' => 'House Tools',
+        ])->create();
 
-    Subcategory::factory([
-        'category_id' => $houseTool->id,
-    ])->count(5)->create();
+        Subcategory::factory([
+            'category_id' => $houseTool->id,
+        ])->count(5)->create();
 
-    $category = getJson(
-        route('categories.show', [
-            'category' => $houseTool,
-        ])
-    )
-        ->json('data');
+        $category = getJson(
+            route('categories.show', [
+                'category' => $houseTool,
+            ])
+        )
+            ->json('data');
 
-    expect($category)
-        ->attributes->name->toBe('House Tools')
-        ->attributes->slug->toBe('house-tools');
-});
+        expect($category)
+            ->attributes->name->toBe('House Tools')
+            ->attributes->slug->toBe('house-tools');
+    });
 
-it('should return 404 if category not found', function () {
-    getJson(route('categories.show', ['category' => 1]))
-        ->assertNotFound();
+    it('should return 404 if category not found', function () {
+        getJson(route('categories.show', ['category' => 1]))
+            ->assertNotFound();
+    });
 });
 
 it('should get all categories', function () {

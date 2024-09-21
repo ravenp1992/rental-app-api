@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\User;
 use Domains\Category\Models\Category;
 use Domains\Subcategory\Models\Subcategory;
+use Domains\User\Models\User;
 
 use function Pest\Laravel\getJson;
 

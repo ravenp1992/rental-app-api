@@ -3,11 +3,17 @@
 namespace App\Http\Requests;
 
 use Domains\Category\Models\Category;
+use Domains\User\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 class UpsertProductRequest extends FormRequest
 {
+    public function getOwner(): User
+    {
+        return User::where('uuid', $this->userId)->firstOrFail();
+    }
+
     public function getCategory(): Category
     {
         return Category::where('uuid', $this->categoryId)->firstOrFail();
@@ -22,6 +28,11 @@ class UpsertProductRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
+            'userId' => [
+                'required',
+                'string',
+                Rule::exists('users', 'uuid'),
+            ],
             'categoryId' => [
                 'required',
                 'string',
@@ -33,6 +44,7 @@ class UpsertProductRequest extends FormRequest
             'deposit' => ['sometimes', 'integer'],
             'stockQuantity' => ['sometimes', 'integer'],
             'status' => ['sometimes', 'string'],
+            'publishedAt' => ['sometimes', 'string'],
         ];
     }
 }

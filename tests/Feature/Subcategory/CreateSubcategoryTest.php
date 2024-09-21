@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\User;
 use Domains\Category\Models\Category;
+use Domains\User\Models\User;
 use Illuminate\Http\Response;
 
 use function Pest\Laravel\postJson;

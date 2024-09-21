@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\User;
 use Domains\Category\Models\Category;
+use Domains\User\Models\User;
 use Illuminate\Http\Response;
 
 use function Pest\Laravel\postJson;
@@ -34,6 +34,7 @@ it('should return a 422 if categoryId is missing', function () {
 
 it('should create a product', function () {
     $product = postJson(route('products.store'), [
+        'userId' => User::factory()->create()->uuid,
         'categoryId' => Category::factory()->create()->uuid,
         'name' => 'Demo',
         'description' => 'Demo description',

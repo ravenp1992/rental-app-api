@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\User;
+use Domains\User\Models\User;
 use Illuminate\Http\Response;
 
 use function Pest\Laravel\postJson;

@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Domains\Category\Models\Category;
 use Domains\Product\Enums\ProductStatus;
 use Domains\Product\Models\Product;
+use Domains\User\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProductFactory extends Factory
@@ -21,6 +22,7 @@ class ProductFactory extends Factory
         $isForSale = (bool) rand(0, 1);
 
         return [
+            'user_id' => User::factory(),
             'category_id' => Category::factory(),
             'name' => $this->faker->name,
             'description' => $this->faker->text,
@@ -28,7 +30,8 @@ class ProductFactory extends Factory
             'buy_price' => $isForSale ? (rand(500, 1000) * 100) : null,
             'deposit' => rand(500, 1000) * 100,
             'stock_quantity' => rand(1, 10),
-            'status' => $this->faker->randomElement(ProductStatus::cases()),
+            'status' => ProductStatus::DRAFT->value,
+            'published_at' => null,
         ];
     }
 }

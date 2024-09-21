@@ -6,6 +6,7 @@ use App\Traits\HasUuid;
 use Database\Factories\ProductFactory;
 use Domains\Category\Models\Category;
 use Domains\Product\Enums\ProductStatus;
+use Domains\User\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -19,11 +20,12 @@ class Product extends Model
     protected $attributes = [
         'deposit' => 0,
         'stock_quantity' => 1,
-        'status' => ProductStatus::DRAFT,
+        'status' => ProductStatus::DRAFT->value,
     ];
 
     protected $fillable = [
         'uuid',
+        'user_id',
         'category_id',
         'name',
         'description',
@@ -45,16 +47,13 @@ class Product extends Model
         return ProductFactory::new();
     }
 
-    public function publish(): void
-    {
-        $this->status = ProductStatus::PUBLISHED->value;
-        $this->publish_at = now();
-
-        $this->save();
-    }
-
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function owner(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }
