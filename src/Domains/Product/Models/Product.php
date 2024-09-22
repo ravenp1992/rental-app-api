@@ -21,6 +21,7 @@ class Product extends Model
         'deposit' => 0,
         'stock_quantity' => 1,
         'status' => ProductStatus::DRAFT->value,
+        'published_at' => null,
     ];
 
     protected $fillable = [

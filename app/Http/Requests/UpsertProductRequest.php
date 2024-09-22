@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Domains\Category\Models\Category;
+use Domains\Product\Enums\ProductStatus;
 use Domains\User\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -27,7 +28,6 @@ class UpsertProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string'],
             'userId' => [
                 'required',
                 'string',
@@ -38,12 +38,13 @@ class UpsertProductRequest extends FormRequest
                 'string',
                 Rule::exists('categories', 'uuid'),
             ],
+            'name' => ['required', 'string'],
             'description' => ['sometimes', 'string'],
             'rentPrice' => ['sometimes', 'integer'],
             'buyPrice' => ['nullable', 'sometimes', 'integer'],
             'deposit' => ['sometimes', 'integer'],
             'stockQuantity' => ['sometimes', 'integer'],
-            'status' => ['sometimes', 'string'],
+            'status' => ['sometimes', Rule::enum(ProductStatus::class)],
             'publishedAt' => ['sometimes', 'string'],
         ];
     }

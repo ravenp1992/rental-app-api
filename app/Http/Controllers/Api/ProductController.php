@@ -11,6 +11,7 @@ use Domains\Product\DataTransferObjects\ProductData;
 use Domains\Product\Models\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Gate;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class ProductController extends Controller
@@ -52,6 +53,10 @@ class ProductController extends Controller
      */
     public function update(UpsertProductRequest $request, Product $product): Response
     {
+        if (! Gate::allows('update-product', $product)) {
+            abort(403);
+        }
+
         $this->upsert($request, $product);
 
         return response()->noContent();
@@ -69,6 +74,10 @@ class ProductController extends Controller
 
     public function publish(Product $product, PublishProductAction $publishProductAction): Response
     {
+        if (! Gate::allows('publish-product', $product)) {
+            abort(403);
+        }
+
         $publishProductAction->execute($product);
 
         return response()->noContent();

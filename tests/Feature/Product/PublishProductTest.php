@@ -8,13 +8,14 @@ use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 
 beforeEach(function () {
-    $user = User::factory()->create();
+    $this->user = User::factory()->create();
 
-    $this->actingAs($user);
+    $this->actingAs($this->user);
 });
 
 it('should publish a product', function () {
     $product = Product::factory([
+        'user_id' => $this->user->id,
         'name' => 'Test Product',
     ])->create();
 
