@@ -13,8 +13,6 @@ class UpsertProductAction
         $product->category_id = $productData->category->id;
         $product->name = $productData->name;
         $product->description = $productData->description;
-        $product->rent_price = $productData->rentPrice;
-        $product->buy_price = $productData->buyPrice;
         $product->deposit = $productData->deposit;
         $product->stock_quantity = $productData->stockQuantity;
         $product->status = $productData->status;

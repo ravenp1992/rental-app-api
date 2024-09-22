@@ -40,8 +40,6 @@ class UpsertProductRequest extends FormRequest
             ],
             'name' => ['required', 'string'],
             'description' => ['sometimes', 'string'],
-            'rentPrice' => ['sometimes', 'integer'],
-            'buyPrice' => ['nullable', 'sometimes', 'integer'],
             'deposit' => ['sometimes', 'integer'],
             'stockQuantity' => ['sometimes', 'integer'],
             'status' => ['sometimes', Rule::enum(ProductStatus::class)],

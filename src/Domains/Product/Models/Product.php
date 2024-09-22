@@ -30,8 +30,6 @@ class Product extends Model
         'category_id',
         'name',
         'description',
-        'rent_price',
-        'buy_price',
         'deposit',
         'stock_quantity',
         'status',

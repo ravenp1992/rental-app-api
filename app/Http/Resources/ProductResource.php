@@ -14,8 +14,6 @@ class ProductResource extends JsonApiResource
             'userId' => $this->user_id,
             'categoryId' => $this->category_id,
             'description' => $this->description,
-            'rentPrice' => $this->rent_price,
-            'buyPrice' => $this->buy_price,
             'deposit' => $this->deposit,
             'stockQuantity' => $this->stock_quantity,
             'status' => $this->status,

@@ -38,7 +38,6 @@ it('should create a product', function () {
         'categoryId' => Category::factory()->create()->uuid,
         'name' => 'Demo',
         'description' => 'Demo description',
-        'rentPrice' => 10 * 100,
         'deposit' => 500 * 100,
         'stockQuantity' => 5,
     ])
@@ -48,7 +47,6 @@ it('should create a product', function () {
     expect($product)
         ->attributes->name->toBe('Demo')
         ->attributes->description->toBe('Demo description')
-        ->attributes->rentPrice->toBe(10 * 100)
         ->attributes->deposit->toBe(500 * 100)
         ->attributes->stockQuantity->toBe(5)
         ->attributes->status->toBe('draft');

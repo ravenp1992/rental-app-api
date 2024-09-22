@@ -20,7 +20,6 @@ it('should update a product', function () {
         'category_id' => $category->id,
         'name' => 'Demo',
         'description' => 'Demo Product',
-        'rent_price' => 10 * 100,
         'deposit' => 500 * 100,
         'stock_quantity' => 2,
     ])->create();
@@ -30,7 +29,6 @@ it('should update a product', function () {
         'categoryId' => $category->uuid,
         'name' => 'Updated Name',
         'description' => 'Demo Product',
-        'rentPrice' => 10 * 100,
         'deposit' => 500 * 100,
         'stockQuantity' => 2,
     ])->assertNoContent();
@@ -48,7 +46,6 @@ it('should return a 403 if user is not the owner of product', function () {
         'category_id' => $category->id,
         'name' => 'Demo',
         'description' => 'Demo Product',
-        'rent_price' => 10 * 100,
         'deposit' => 500 * 100,
         'stock_quantity' => 2,
     ])->create();
@@ -60,7 +57,6 @@ it('should return a 403 if user is not the owner of product', function () {
         'categoryId' => $category->uuid,
         'name' => 'Updated Name',
         'description' => 'Demo Product',
-        'rentPrice' => 10 * 100,
         'deposit' => 500 * 100,
         'stockQuantity' => 2,
     ])->assertForbidden();

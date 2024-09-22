@@ -19,8 +19,6 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained();
             $table->string('name');
             $table->longText('description')->nullable();
-            $table->unsignedInteger('rent_price');
-            $table->unsignedInteger('buy_price')->nullable();
             $table->unsignedInteger('deposit')->default(0);
             $table->integer('stock_quantity')->default(1);
             $table->string('status')->default(ProductStatus::DRAFT->value);

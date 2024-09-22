@@ -19,15 +19,11 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
-        $isForSale = (bool) rand(0, 1);
-
         return [
             'user_id' => User::factory(),
             'category_id' => Category::factory(),
             'name' => $this->faker->name,
             'description' => $this->faker->text,
-            'rent_price' => rand(10, 100) * 100,
-            'buy_price' => $isForSale ? (rand(500, 1000) * 100) : null,
             'deposit' => rand(500, 1000) * 100,
             'stock_quantity' => rand(1, 10),
             'status' => ProductStatus::DRAFT->value,
