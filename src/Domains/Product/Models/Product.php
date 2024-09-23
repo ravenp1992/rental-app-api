@@ -36,14 +36,14 @@ class Product extends Model
         'published_at',
     ];
 
-    public function getRouteKeyName(): string
-    {
-        return 'uuid';
-    }
-
     protected static function newFactory(): Factory
     {
         return ProductFactory::new();
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'uuid';
     }
 
     public function category(): BelongsTo
