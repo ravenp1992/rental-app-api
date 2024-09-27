@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UpsertProductRequest;
+use App\Http\Requests\Api\Product\UpsertProductRequest;
 use App\Http\Resources\ProductResource;
 use Domains\Product\Actions\PublishProductAction;
 use Domains\Product\Actions\UpsertProductAction;
@@ -85,7 +85,7 @@ class ProductController extends Controller
 
     private function upsert(UpsertProductRequest $request, Product $product): Product
     {
-        $productData = ProductData::fromRequest($request);
+        $productData = ProductData::fromArray($request->validated());
 
         return $this->upsertProductAction->execute($product, $productData);
     }

@@ -11,43 +11,45 @@ beforeEach(function () {
     $this->actingAs($user);
 });
 
-it('should return a 422 if name is missing', function () {
-    postJson(route('products.store'), [
-        'name' => null,
-        'description' => 'Demo description',
-    ])->assertInvalid(['name']);
-});
+describe('Create Product', function () {
+    it('should return a 422 if name is missing', function () {
+        postJson(route('products.store'), [
+            'name' => null,
+            'description' => 'Demo description',
+        ])->assertInvalid(['name']);
+    });
 
-it('should return a 422 if deposit is missing', function () {
-    postJson(route('products.store'), [
-        'name' => 'Demo',
-        'deposit' => null,
-    ])->assertInvalid(['deposit']);
-});
+    it('should return a 422 if deposit is missing', function () {
+        postJson(route('products.store'), [
+            'name' => 'Demo',
+            'deposit' => null,
+        ])->assertInvalid(['deposit']);
+    });
 
-it('should return a 422 if categoryId is missing', function () {
-    postJson(route('products.store'), [
-        'name' => 'Demo',
-        'deposit' => 1000,
-    ])->assertInvalid(['categoryId']);
-});
+    it('should return a 422 if categoryId is missing', function () {
+        postJson(route('products.store'), [
+            'name' => 'Demo',
+            'deposit' => 1000,
+        ])->assertInvalid(['categoryId']);
+    });
 
-it('should create a product', function () {
-    $product = postJson(route('products.store'), [
-        'userId' => User::factory()->create()->uuid,
-        'categoryId' => Category::factory()->create()->uuid,
-        'name' => 'Demo',
-        'description' => 'Demo description',
-        'deposit' => 500 * 100,
-        'stockQuantity' => 5,
-    ])
-        ->assertStatus(Response::HTTP_CREATED)
-        ->json('data');
+    it('should create a product', function () {
+        $product = postJson(route('products.store'), [
+            'userId' => User::factory()->create()->uuid,
+            'categoryId' => Category::factory()->create()->uuid,
+            'name' => 'Demo',
+            'description' => 'Demo description',
+            'deposit' => 500 * 100,
+            'stockQuantity' => 5,
+        ])
+            ->assertStatus(Response::HTTP_CREATED)
+            ->json('data');
 
-    expect($product)
-        ->attributes->name->toBe('Demo')
-        ->attributes->description->toBe('Demo description')
-        ->attributes->deposit->toBe(500 * 100)
-        ->attributes->stockQuantity->toBe(5)
-        ->attributes->status->toBe('draft');
+        expect($product)
+            ->attributes->name->toBe('Demo')
+            ->attributes->description->toBe('Demo description')
+            ->attributes->deposit->toBe(500 * 100)
+            ->attributes->stockQuantity->toBe(5)
+            ->attributes->status->toBe('draft');
+    });
 });

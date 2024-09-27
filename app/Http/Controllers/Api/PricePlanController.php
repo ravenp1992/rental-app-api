@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PricePlan\UpsertPricePlanRequest;
+use App\Http\Requests\Api\PricePlan\UpsertPricePlanRequest;
 use App\Http\Resources\PricePlanResource;
-use Domains\Product\Actions\UpsertPricePlanAction;
-use Domains\Product\DataTransferObjects\PricePlanData;
-use Domains\Product\Models\PricePlan;
+use Domains\PricePlan\Actions\UpsertPricePlanAction;
+use Domains\PricePlan\DataTransferObjects\PricePlanData;
+use Domains\PricePlan\Models\PricePlan;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Spatie\QueryBuilder\QueryBuilder;

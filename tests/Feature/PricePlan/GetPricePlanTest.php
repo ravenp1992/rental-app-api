@@ -1,6 +1,6 @@
 <?php
 
-use Domains\Product\Models\PricePlan;
+use Domains\PricePlan\Models\PricePlan;
 use Domains\User\Models\User;
 
 use function Pest\Laravel\getJson;

@@ -2,8 +2,6 @@
 
 namespace Domains\Category\DataTransferObjects;
 
-use App\Http\Requests\UpsertCategoryRequest;
-
 class CategoryData
 {
     /**
@@ -11,18 +9,16 @@ class CategoryData
      */
     public function __construct(
         public readonly string $name,
-        public readonly ?string $slug,
         public readonly ?int $isActive
     ) {
         //
     }
 
-    public static function fromRequest(UpsertCategoryRequest $request): self
+    public static function fromArray(array $validated): self
     {
         return new self(
-            $request->name,
-            $request->slug,
-            $request->isActive
+            name: $validated['name'],
+            isActive: $validated['isActive']
         );
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Api\Product;
 
 use Domains\Category\Models\Category;
 use Domains\Product\Enums\ProductStatus;
@@ -28,6 +28,7 @@ class UpsertProductRequest extends FormRequest
     public function rules(): array
     {
         return [
+            // Product
             'userId' => [
                 'required',
                 'string',
@@ -44,6 +45,15 @@ class UpsertProductRequest extends FormRequest
             'stockQuantity' => ['sometimes', 'integer'],
             'status' => ['sometimes', Rule::enum(ProductStatus::class)],
             'publishedAt' => ['sometimes', 'string'],
+
+            // Price
+            'dailyRate' => ['nullable', 'sometimes', 'integer'],
+            'weeklyRate' => ['nullable', 'sometimes', 'integer'],
+            'monthlyRate' => ['nullable', 'sometimes', 'integer'],
+            'buyPrice' => ['nullable', 'sometimes', 'integer'],
+            'currency' => ['sometimes', 'string'],
+            'validFrom' => ['sometimes', 'date'],
+            'validTo' => ['sometimes', 'date'],
         ];
     }
 }

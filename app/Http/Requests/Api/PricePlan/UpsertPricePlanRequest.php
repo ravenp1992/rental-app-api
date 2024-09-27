@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\PricePlan;
+namespace App\Http\Requests\Api\PricePlan;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;

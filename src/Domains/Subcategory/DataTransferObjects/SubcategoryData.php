@@ -2,7 +2,6 @@
 
 namespace Domains\Subcategory\DataTransferObjects;
 
-use App\Http\Requests\UpsertSubcategoryRequest;
 use Domains\Category\Models\Category;
 
 class SubcategoryData
@@ -18,12 +17,12 @@ class SubcategoryData
         //
     }
 
-    public static function fromRequest(UpsertSubcategoryRequest $request): self
+    public static function fromArray(array $validated): self
     {
         return new self(
-            category: $request->getCategory(),
-            name: $request->name,
-            isActive: $request->isActive ?? 0
+            category: Category::where('uuid', $validated['categoryId'])->firstOrFail(),
+            name: $validated['name'],
+            isActive: $validated['isActive'] ?? 0
         );
     }
 }

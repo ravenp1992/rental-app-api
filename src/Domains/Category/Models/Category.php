@@ -29,14 +29,14 @@ class Category extends Model
         'is_active' => false,
     ];
 
-    public function getRouteKeyName(): string
-    {
-        return 'uuid';
-    }
-
     protected static function newFactory(): Factory
     {
         return CategoryFactory::new();
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'uuid';
     }
 
     public function subCategories(): HasMany

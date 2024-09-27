@@ -1,6 +1,6 @@
 <?php
 
-namespace Domains\Product\Models;
+namespace Domains\PricePlan\Models;
 
 use App\Traits\HasUuid;
 use Database\Factories\PricePlanFactory;

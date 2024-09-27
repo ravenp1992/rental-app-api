@@ -1,18 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Api\Subcategory;
 
-use Domains\Category\Models\Category;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 class UpsertSubcategoryRequest extends FormRequest
 {
-    public function getCategory(): Category
-    {
-        return Category::where('uuid', $this->categoryId)->firstOrFail();
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *

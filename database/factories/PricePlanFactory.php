@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use Domains\Product\Models\PricePlan;
+use Domains\PricePlan\Models\PricePlan;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

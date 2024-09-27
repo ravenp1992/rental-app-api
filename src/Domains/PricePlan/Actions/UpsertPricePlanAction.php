@@ -1,9 +1,9 @@
 <?php
 
-namespace Domains\Product\Actions;
+namespace Domains\PricePlan\Actions;
 
-use Domains\Product\DataTransferObjects\PricePlanData;
-use Domains\Product\Models\PricePlan;
+use Domains\PricePlan\DataTransferObjects\PricePlanData;
+use Domains\PricePlan\Models\PricePlan;
 
 class UpsertPricePlanAction
 {

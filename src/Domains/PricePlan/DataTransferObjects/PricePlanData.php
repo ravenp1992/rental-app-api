@@ -1,8 +1,8 @@
 <?php
 
-namespace Domains\Product\DataTransferObjects;
+namespace Domains\PricePlan\DataTransferObjects;
 
-use App\Http\Requests\PricePlan\UpsertPricePlanRequest;
+use App\Http\Requests\Api\PricePlan\UpsertPricePlanRequest;
 
 class PricePlanData
 {

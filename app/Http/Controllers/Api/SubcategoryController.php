@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UpsertSubcategoryRequest;
+use App\Http\Requests\Api\Subcategory\UpsertSubcategoryRequest;
 use App\Http\Resources\SubcategoryResource;
 use Domains\Subcategory\Actions\UpsertSubcategoryAction;
 use Domains\Subcategory\DataTransferObjects\SubcategoryData;
@@ -75,7 +75,7 @@ class SubcategoryController extends Controller
 
     private function upsert(UpsertSubcategoryRequest $request, Subcategory $subcategory): Subcategory
     {
-        $subCategoryData = SubcategoryData::fromRequest($request);
+        $subCategoryData = SubcategoryData::fromArray($request->validated());
 
         return $this->upsertSubcategoryAction->execute($subcategory, $subCategoryData);
     }
