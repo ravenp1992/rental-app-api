@@ -33,8 +33,8 @@ class PriceFactory extends Factory
             'monthly_rate' => $monthlyRate,
             'buy_price' => $buyPrice,
             'currency' => $this->faker->randomElement(['USD', 'PHP']),
-            'valid_from' => $validFrom,
-            'valid_to' => $validTo,
+            'valid_from' => $validFrom->format('Y-m-d'),
+            'valid_to' => $validTo->format('Y-m-d'),
         ];
     }
 }

@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('uuid');
             $table->foreignId('product_id')->constrained();
-            $table->integer('daily_rate')->nullable();
-            $table->integer('weekly_rate')->nullable();
-            $table->integer('monthly_rate')->nullable();
+            $table->integer('daily_rate')->default(0);
+            $table->integer('weekly_rate')->default(0);
+            $table->integer('monthly_rate')->defaultt(0);
             $table->integer('buy_price')->nullable();
             $table->string('currency', length: 3);
             $table->date('valid_from');

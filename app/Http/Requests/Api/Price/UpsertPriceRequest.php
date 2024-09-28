@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Api\ProductPrice;
+namespace App\Http\Requests\Api\Price;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpsertProductPriceRequest extends FormRequest
+class UpsertPriceRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -20,36 +20,42 @@ class UpsertProductPriceRequest extends FormRequest
                 Rule::exists('products', 'uuid'),
             ],
             'dailyRate' => [
-                'nullable',
                 'sometimes',
-                'integer',
+                'numeric',
+                'min:1',
             ],
             'weeklyRate' => [
-                'nullable',
                 'sometimes',
-                'integer',
+                'numeric',
+                'min:1',
             ],
             'monthlyRate' => [
-                'nullable',
                 'sometimes',
-                'integer',
+                'numeric',
+                'min:1',
             ],
             'buyPrice' => [
                 'nullable',
                 'sometimes',
-                'integer',
+                'numeric',
+                'min:1',
             ],
             'currency' => [
                 'sometimes',
                 'string',
+                'max:3',
             ],
             'validFrom' => [
                 'sometimes',
-                'string',
+                'date',
+                'date_format:Y-m-d',
+                'before:validTo',
             ],
             'validTo' => [
                 'sometimes',
-                'string',
+                'date',
+                'date_format:Y-m-d',
+                'after_or_equal:validTo',
             ],
         ];
     }

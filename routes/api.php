@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\PriceController;
 use App\Http\Controllers\Api\PricePlanController;
 use App\Http\Controllers\Api\ProductController;
-use App\Http\Controllers\Api\ProductPriceController;
 use App\Http\Controllers\Api\SubcategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,9 +32,7 @@ Route::middleware('auth:sanctum')->group(function () {
     /* products */
     Route::apiResource('products', ProductController::class)->except(['index']);
     Route::post('/products/{product}/publish', [ProductController::class, 'publish'])->name('products.publish');
-    Route::apiResource('/products/{product}/price', ProductPriceController::class)->names([
-        'store' => 'products.price.store',
-        'update' => 'products.price.update',
-    ])->only(['store', 'update']);
+
+    Route::apiResource('prices', PriceController::class)->only(['store', 'update']);
 
 });

@@ -14,6 +14,10 @@ class Price extends Model
     use HasFactory;
     use HasUuid;
 
+    protected $attributes = [
+        'currency' => 'USD',
+    ];
+
     protected $fillable = [
         'uuid',
         'product_id',
