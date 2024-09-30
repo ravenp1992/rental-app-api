@@ -22,17 +22,17 @@ class PriceData
         //
     }
 
-    public static function fromArray(array $validated): self
+    public static function fromArray(array $data): self
     {
         return new static(
-            product: Product::where('uuid', $validated['productId'])->firstOrFail(),
-            dailyRate: $validated['dailyRate'],
-            weeklyRate: $validated['weeklyRate'],
-            monthlyRate: $validated['monthlyRate'],
-            buyPrice: $validated['buyPrice'] ?? null,
-            currency: $validated['currency'],
-            validFrom: $validated['validFrom'],
-            validTo: $validated['validTo'],
+            product: $data['product'],
+            dailyRate: $data['dailyRate'],
+            weeklyRate: $data['weeklyRate'],
+            monthlyRate: $data['monthlyRate'],
+            buyPrice: $data['buyPrice'] ?? null,
+            currency: $data['currency'],
+            validFrom: $data['validFrom'],
+            validTo: $data['validTo'],
         );
     }
 }

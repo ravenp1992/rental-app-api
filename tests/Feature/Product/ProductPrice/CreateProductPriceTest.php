@@ -13,18 +13,10 @@ beforeEach(function () {
 });
 
 describe('Create Product Price', function () {
-
-    it('should return 422 if productId is missing', function () {
-        $product = Product::factory()->create();
-
-        $price = postJson(route('prices.store', compact('product')), [])
-            ->assertInvalid(['productId']);
-    });
-
     it('should return 422 if dailyRate is', function (int|string $dailyRate) {
         $product = Product::factory()->create();
 
-        $price = postJson(route('prices.store', compact('product')), [
+        $price = postJson(route('products.prices.store', compact('product')), [
             'productId' => $product->uuid,
             'dailyRate' => $dailyRate,
         ])
@@ -39,7 +31,7 @@ describe('Create Product Price', function () {
     it('should return 422 if weeklyRate is', function (int|string $weeklyRate) {
         $product = Product::factory()->create();
 
-        $price = postJson(route('prices.store', compact('product')), [
+        $price = postJson(route('products.prices.store', compact('product')), [
             'productId' => $product->uuid,
             'weeklyRate' => $weeklyRate,
         ])
@@ -54,7 +46,7 @@ describe('Create Product Price', function () {
     it('should return 422 if monthlyRate is', function (int|string $monthlyRate) {
         $product = Product::factory()->create();
 
-        $price = postJson(route('prices.store', compact('product')), [
+        $price = postJson(route('products.prices.store', compact('product')), [
             'productId' => $product->uuid,
             'monthlyRate' => $monthlyRate,
         ])
@@ -69,7 +61,7 @@ describe('Create Product Price', function () {
     it('should return 422 if currency is', function (int $dailyRate, int $weeklyRate, int $monthlyRate, ?string $currency) {
         $product = Product::factory()->create();
 
-        $price = postJson(route('prices.store', compact('product')), [
+        $price = postJson(route('products.prices.store', compact('product')), [
             'productId' => $product->uuid,
             'dailyRate' => $dailyRate,
             'weeklyRate' => $weeklyRate,
@@ -86,7 +78,7 @@ describe('Create Product Price', function () {
     it('should return 422 if validFrom is', function (?string $validFrom, ?string $validTo) {
         $product = Product::factory()->create();
 
-        $price = postJson(route('prices.store', compact('product')), [
+        $price = postJson(route('products.prices.store', compact('product')), [
             'productId' => $product->uuid,
             'dailyRate' => 15,
             'weeklyRate' => 25,
@@ -105,7 +97,7 @@ describe('Create Product Price', function () {
     it('should return 422 if validTo is', function (?string $validFrom, ?string $validTo) {
         $product = Product::factory()->create();
 
-        $price = postJson(route('prices.store', compact('product')), [
+        $price = postJson(route('products.prices.store', compact('product')), [
             'productId' => $product->uuid,
             'dailyRate' => 15,
             'weeklyRate' => 25,
@@ -123,7 +115,7 @@ describe('Create Product Price', function () {
     it('should create a product', function () {
         $product = Product::factory()->create();
 
-        $price = postJson(route('prices.store', ['product' => $product->uuid]), [
+        $price = postJson(route('products.prices.store', ['product' => $product->uuid]), [
             'productId' => $product->uuid,
             'dailyRate' => 15,
             'weeklyRate' => 25,

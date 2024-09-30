@@ -11,28 +11,27 @@ beforeEach(function () {
     $this->actingAs($user);
 });
 
-it('should return 422 if categoryId is missing', function () {
-    postJson(route('subcategories.store'), [
-        'name' => 'fastener',
-    ])
-        ->assertInvalid(['categoryId']);
-});
+describe('Create Category Subcategory', function () {
 
-it('should return 422 if name is missing', function () {
-    postJson(route('subcategories.store'), [
-        'categoryId' => Category::factory()->create()->uuid,
-    ])
-        ->assertInvalid(['name']);
-});
+    it('should return 422 if name is missing', function () {
+        $category = Category::factory()->create();
 
-it('should create a sub category', function () {
-    $subCategory = postJson(route('subcategories.store'), [
-        'categoryId' => Category::factory()->create()->uuid,
-        'name' => 'fastener',
-    ])
-        ->assertStatus(Response::HTTP_CREATED)
-        ->json('data');
+        postJson(route('categories.subcategories.store', compact('category')), [
+            'categoryId' => Category::factory()->create()->uuid,
+        ])
+            ->assertInvalid(['name']);
+    });
 
-    expect($subCategory)
-        ->attributes->name->toBe('fastener');
+    it('should create a sub category', function () {
+        $category = Category::factory()->create();
+
+        $subCategory = postJson(route('categories.subcategories.store', compact('category')), [
+            'name' => 'fastener',
+        ])
+            ->assertStatus(Response::HTTP_CREATED)
+            ->json('data');
+
+        expect($subCategory)
+            ->attributes->name->toBe('fastener');
+    });
 });

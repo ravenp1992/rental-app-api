@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Api\Subcategory;
+namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpsertSubcategoryRequest extends FormRequest
+class UpsertCategoryRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -15,19 +15,12 @@ class UpsertSubcategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'categoryId' => [
-                'required',
-                'string',
-                Rule::exists('categories', 'uuid'),
-            ],
             'name' => [
                 'required',
                 'string',
+                Rule::unique('categories', 'name')->ignore($this->category),
             ],
-            'isActive' => [
-                'sometimes',
-                'integer',
-            ],
+            'isActive' => ['sometimes', 'integer'],
         ];
     }
 }

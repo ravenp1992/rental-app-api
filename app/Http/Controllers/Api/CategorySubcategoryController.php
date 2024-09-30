@@ -3,16 +3,17 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Subcategory\UpsertSubcategoryRequest;
+use App\Http\Requests\Api\UpsertCategorySubcategoryRequest;
 use App\Http\Resources\SubcategoryResource;
-use Domains\Subcategory\Actions\UpsertSubcategoryAction;
-use Domains\Subcategory\DataTransferObjects\SubcategoryData;
-use Domains\Subcategory\Models\Subcategory;
+use Domains\Category\Actions\UpsertSubcategoryAction;
+use Domains\Category\DataTransferObjects\SubcategoryData;
+use Domains\Category\Models\Category;
+use Domains\Category\Models\Subcategory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Spatie\QueryBuilder\QueryBuilder;
 
-class SubcategoryController extends Controller
+class CategorySubcategoryController extends Controller
 {
     public function __construct(private readonly UpsertSubcategoryAction $upsertSubcategoryAction)
     {
@@ -34,31 +35,19 @@ class SubcategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UpsertSubcategoryRequest $request): JsonResponse
+    public function store(UpsertCategorySubcategoryRequest $request, Category $category): JsonResponse
     {
-        return SubcategoryResource::make($this->upsert($request, new Subcategory))
+        return SubcategoryResource::make($this->upsert($request, $category, new Subcategory))
             ->response()
             ->setStatusCode(Response::HTTP_CREATED);
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Subcategory $subcategory): SubcategoryResource
-    {
-        $subcategory = QueryBuilder::for(Subcategory::class)
-            ->allowedIncludes(['category'])
-            ->findOrFail($subcategory->id);
-
-        return SubcategoryResource::make($subcategory);
-    }
-
-    /**
      * Update the specified resource in storage.
      */
-    public function update(UpsertSubcategoryRequest $request, Subcategory $subcategory): Response
+    public function update(UpsertCategorySubcategoryRequest $request, Category $category, Subcategory $subcategory): Response
     {
-        $this->upsert($request, $subcategory);
+        $this->upsert($request, $category, $subcategory);
 
         return response()->noContent();
     }
@@ -73,9 +62,9 @@ class SubcategoryController extends Controller
         return response()->noContent();
     }
 
-    private function upsert(UpsertSubcategoryRequest $request, Subcategory $subcategory): Subcategory
+    private function upsert(UpsertCategorySubcategoryRequest $request, Category $category, Subcategory $subcategory): Subcategory
     {
-        $subCategoryData = SubcategoryData::fromArray($request->validated());
+        $subCategoryData = SubcategoryData::fromArray(array_merge(['category' => $category], $request->validated()));
 
         return $this->upsertSubcategoryAction->execute($subcategory, $subCategoryData);
     }

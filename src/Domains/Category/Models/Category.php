@@ -6,7 +6,6 @@ use App\Traits\HasSlug;
 use App\Traits\HasUuid;
 use Database\Factories\CategoryFactory;
 use Domains\Product\Models\Product;
-use Domains\Subcategory\Models\Subcategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

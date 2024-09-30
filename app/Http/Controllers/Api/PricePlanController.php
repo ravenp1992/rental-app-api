@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\PricePlan\UpsertPricePlanRequest;
+use App\Http\Requests\Api\UpsertPricePlanRequest;
 use App\Http\Resources\PricePlanResource;
 use Domains\PricePlan\Actions\UpsertPricePlanAction;
 use Domains\PricePlan\DataTransferObjects\PricePlanData;

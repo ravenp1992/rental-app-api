@@ -5,7 +5,7 @@ namespace Domains\Product\Actions;
 use Domains\Product\DataTransferObjects\PriceData;
 use Domains\Product\Models\Price;
 
-class UpsertProductPriceAction
+class UpsertPriceAction
 {
     public static function execute(Price $price, PriceData $priceData): Price
     {

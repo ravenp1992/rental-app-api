@@ -2,7 +2,7 @@
 
 namespace Domains\PricePlan\DataTransferObjects;
 
-use App\Http\Requests\Api\PricePlan\UpsertPricePlanRequest;
+use App\Http\Requests\Api\UpsertPricePlanRequest;
 
 class PricePlanData
 {

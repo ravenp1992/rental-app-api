@@ -1,10 +1,9 @@
 <?php
 
-namespace Domains\Subcategory\Models;
+namespace Domains\Category\Models;
 
 use App\Traits\HasUuid;
 use Database\Factories\SubcategoryFactory;
-use Domains\Category\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

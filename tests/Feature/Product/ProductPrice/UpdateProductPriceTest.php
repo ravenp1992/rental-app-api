@@ -13,29 +13,16 @@ describe('Update Product Price', function () {
         $this->actingAs($user);
     });
 
-    it('should should return 422 if productId is missing', function () {
-        $product = Product::factory()->create();
-        $price = Price::factory([
-            'product_id' => $product->id,
-        ])->create();
-
-        putJson(route('prices.update', [
-            'product' => $product->uuid, 'price' => $price->uuid,
-        ]), [
-            //
-        ])->assertInvalid(['productId']);
-    });
-
     it('should update a product', function () {
         $product = Product::factory()->create();
         $price = Price::factory([
             'product_id' => $product->id,
         ])->create();
 
-        putJson(route('prices.update', [
+        putJson(route('products.prices.update', [
+            'product' => $product->uuid,
             'price' => $price->uuid,
         ]), [
-            'productId' => $product->uuid,
             'dailyRate' => 50,
             'weeklyRate' => 350,
             'monthlyRate' => 1400,

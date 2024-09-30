@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api\Price;
+namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UpsertPriceRequest extends FormRequest
+class UpsertProductPriceRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -15,10 +14,6 @@ class UpsertPriceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'productId' => [
-                'required',
-                Rule::exists('products', 'uuid'),
-            ],
             'dailyRate' => [
                 'sometimes',
                 'numeric',

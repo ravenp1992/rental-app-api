@@ -1,6 +1,6 @@
 <?php
 
-namespace Domains\Subcategory\DataTransferObjects;
+namespace Domains\Category\DataTransferObjects;
 
 use Domains\Category\Models\Category;
 
@@ -17,12 +17,12 @@ class SubcategoryData
         //
     }
 
-    public static function fromArray(array $validated): self
+    public static function fromArray(array $data): self
     {
         return new self(
-            category: Category::where('uuid', $validated['categoryId'])->firstOrFail(),
-            name: $validated['name'],
-            isActive: $validated['isActive'] ?? 0
+            category: $data['category'],
+            name: $data['name'],
+            isActive: $data['isActive'] ?? 0
         );
     }
 }

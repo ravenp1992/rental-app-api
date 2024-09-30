@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Product\UpsertProductRequest;
+use App\Http\Requests\Api\UpsertProductRequest;
 use App\Http\Resources\ProductResource;
 use Domains\Product\Actions\PublishProductAction;
 use Domains\Product\Actions\UpsertProductAction;

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Category\UpsertCategoryRequest;
+use App\Http\Requests\Api\UpsertCategoryRequest;
 use App\Http\Resources\CategoryResource;
 use Domains\Category\Actions\UpserCategoryAction;
 use Domains\Category\DataTransferObjects\CategoryData;

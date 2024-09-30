@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Domains\Category\Models\Category;
-use Domains\Subcategory\Models\Subcategory;
+use Domains\Category\Models\Subcategory;
 use Illuminate\Database\Seeder;
 
 class SubcategorySeeder extends Seeder
