@@ -5,6 +5,7 @@ namespace Domains\Category\Models;
 use App\Traits\HasSlug;
 use App\Traits\HasUuid;
 use Database\Factories\CategoryFactory;
+use Domains\Category\Enums\CategoryStatus;
 use Domains\Product\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,11 +22,11 @@ class Category extends Model
         'uuid',
         'name',
         'slug',
-        'is_active',
+        'status',
     ];
 
     protected $attributes = [
-        'is_active' => false,
+        'status' => CategoryStatus::INACTIVE->value,
     ];
 
     protected static function newFactory(): Factory

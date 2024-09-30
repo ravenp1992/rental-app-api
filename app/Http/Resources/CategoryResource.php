@@ -12,7 +12,7 @@ class CategoryResource extends JsonApiResource
         return [
             'name' => $this->name,
             'slug' => $this->slug,
-            'isActive' => $this->is_active,
+            'status' => $this->status,
         ];
     }
 

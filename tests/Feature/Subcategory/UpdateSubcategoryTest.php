@@ -11,7 +11,7 @@ beforeEach(function () {
     $this->actingAs($user);
 });
 
-it('should update subcategory', function (string $name, int $isActive) {
+it('should update subcategory', function (string $name, string $status) {
     $category = Category::factory()->create();
 
     $subcategory = Subcategory::factory([
@@ -21,7 +21,7 @@ it('should update subcategory', function (string $name, int $isActive) {
 
     putJson(route('categories.subcategories.update', compact('category', 'subcategory')), [
         'name' => $name,
-        'isActive' => $isActive,
+        'status' => $status,
     ])
         ->assertNoContent();
 
@@ -29,7 +29,7 @@ it('should update subcategory', function (string $name, int $isActive) {
 
     expect($subCategory)
         ->name->toBe($name)
-        ->is_active->toBe($isActive);
+        ->status->toBe($status);
 })->with([
-    ['name' => 'Updated Sub Category', 'isActive' => 1],
+    ['name' => 'Updated Sub Category', 'status' => 'active'],
 ]);

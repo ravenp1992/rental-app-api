@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Domains\Category\Enums\CategoryStatus;
 use Domains\Category\Models\Category;
 use Domains\Category\Models\Subcategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -21,7 +22,7 @@ class SubcategoryFactory extends Factory
             'uuid' => $this->faker->uuid,
             'category_id' => Category::factory(),
             'name' => $this->faker->name,
-            'is_active' => $this->faker->randomElement([1, 0]),
+            'status' => $this->faker->randomElement(CategoryStatus::cases()),
         ];
     }
 }

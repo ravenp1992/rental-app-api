@@ -4,6 +4,7 @@ namespace Domains\Category\Models;
 
 use App\Traits\HasUuid;
 use Database\Factories\SubcategoryFactory;
+use Domains\Category\Enums\CategoryStatus;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,11 +19,11 @@ class Subcategory extends Model
         'uuid',
         'category_id',
         'name',
-        'is_active',
+        'status',
     ];
 
     protected $attributes = [
-        'is_active' => 0,
+        'status' => CategoryStatus::INACTIVE->value,
     ];
 
     public function getRouteKeyName(): string

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\UpsertCategoryRequest;
 use App\Http\Resources\CategoryResource;
-use Domains\Category\Actions\UpserCategoryAction;
+use Domains\Category\Actions\UpsertCategoryAction;
 use Domains\Category\DataTransferObjects\CategoryData;
 use Domains\Category\Models\Category;
 use Illuminate\Http\JsonResponse;
@@ -14,7 +14,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class CategoryController extends Controller
 {
-    public function __construct(private readonly UpserCategoryAction $upserCategoryAction) {}
+    public function __construct(private readonly UpsertCategoryAction $upserCategoryAction) {}
 
     /**
      * Display a listing of the resource.

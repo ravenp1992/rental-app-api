@@ -1,5 +1,6 @@
 <?php
 
+use Domains\Category\Enums\CategoryStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,7 +17,7 @@ return new class extends Migration
             $table->string('uuid');
             $table->foreignId('category_id')->constrained();
             $table->string('name');
-            $table->unsignedTinyInteger('is_active')->default(0);
+            $table->string('status')->default(CategoryStatus::INACTIVE->value);
             $table->timestamps();
         });
     }

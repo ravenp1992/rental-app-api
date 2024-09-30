@@ -11,7 +11,7 @@ class UpsertSubcategoryAction
     {
         $subcategory->category_id = $subcategoryData->category->id;
         $subcategory->name = $subcategoryData->name;
-        $subcategory->is_active = $subcategoryData->isActive;
+        $subcategory->status = $subcategoryData->status;
         $subcategory->save();
 
         return $subcategory;

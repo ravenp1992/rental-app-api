@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Api;
 
+use Domains\Category\Enums\CategoryStatus;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -20,7 +21,7 @@ class UpsertCategoryRequest extends FormRequest
                 'string',
                 Rule::unique('categories', 'name')->ignore($this->category),
             ],
-            'isActive' => ['sometimes', 'integer'],
+            'status' => ['sometimes', Rule::enum(CategoryStatus::class)],
         ];
     }
 }

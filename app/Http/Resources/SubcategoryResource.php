@@ -12,7 +12,7 @@ class SubcategoryResource extends JsonApiResource
         return [
             'categoryId' => $this->category_id,
             'name' => $this->name,
-            'isActive' => $this->is_active,
+            'status' => $this->status,
         ];
     }
 

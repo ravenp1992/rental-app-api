@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Api;
 
+use Domains\Category\Enums\CategoryStatus;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpsertCategorySubcategoryRequest extends FormRequest
 {
@@ -18,9 +20,9 @@ class UpsertCategorySubcategoryRequest extends FormRequest
                 'required',
                 'string',
             ],
-            'isActive' => [
+            'status' => [
                 'sometimes',
-                'integer',
+                Rule::enum(CategoryStatus::class),
             ],
         ];
     }

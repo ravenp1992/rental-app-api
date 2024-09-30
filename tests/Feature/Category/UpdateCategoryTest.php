@@ -10,20 +10,21 @@ beforeEach(function () {
     $this->actingAs($user);
 });
 
-it('it should return an updated category', function (string $name, int $isActive) {
+it('it should return an updated category', function (string $name, string $status) {
     $category = Category::factory([
         'name' => 'tools',
     ])->create();
 
     putJson(route('categories.update', compact('category')), [
         'name' => $name,
-        'isActive' => $isActive,
-    ])->assertNoContent();
+        'status' => $status,
+    ])
+        ->assertNoContent();
 
     expect(Category::find($category->id))
         ->name->toBe($name)
-        ->is_active->toBe($isActive);
+        ->status->toBe($status);
 })->with([
-    ['name' => 'tools', 'isActive' => 1],
-    ['name' => 'tools updated', 'isActive' => 0],
+    ['name' => 'tools', 'status' => 'active'],
+    ['name' => 'tools updated', 'status' => 'inactive'],
 ]);

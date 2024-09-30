@@ -9,7 +9,7 @@ class CategoryData
      */
     public function __construct(
         public readonly string $name,
-        public readonly ?int $isActive
+        public readonly string $status
     ) {
         //
     }
@@ -18,7 +18,7 @@ class CategoryData
     {
         return new self(
             name: $validated['name'],
-            isActive: $validated['isActive']
+            status: $validated['status']
         );
     }
 }
