@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\UpsertCategorySubcategoryRequest;
+use App\Http\Requests\Api\UpsertSubcategoryRequest;
 use App\Http\Resources\SubcategoryResource;
 use Domains\Category\Actions\UpsertSubcategoryAction;
 use Domains\Category\DataTransferObjects\SubcategoryData;
@@ -13,7 +13,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Spatie\QueryBuilder\QueryBuilder;
 
-class CategorySubcategoryController extends Controller
+class SubcategoryController extends Controller
 {
     public function __construct(private readonly UpsertSubcategoryAction $upsertSubcategoryAction)
     {
@@ -35,7 +35,7 @@ class CategorySubcategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UpsertCategorySubcategoryRequest $request, Category $category): JsonResponse
+    public function store(UpsertSubcategoryRequest $request, Category $category): JsonResponse
     {
         return SubcategoryResource::make($this->upsert($request, $category, new Subcategory))
             ->response()
@@ -45,7 +45,7 @@ class CategorySubcategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpsertCategorySubcategoryRequest $request, Category $category, Subcategory $subcategory): Response
+    public function update(UpsertSubcategoryRequest $request, Category $category, Subcategory $subcategory): Response
     {
         $this->upsert($request, $category, $subcategory);
 
@@ -62,7 +62,7 @@ class CategorySubcategoryController extends Controller
         return response()->noContent();
     }
 
-    private function upsert(UpsertCategorySubcategoryRequest $request, Category $category, Subcategory $subcategory): Subcategory
+    private function upsert(UpsertSubcategoryRequest $request, Category $category, Subcategory $subcategory): Subcategory
     {
         $subCategoryData = SubcategoryData::fromArray(array_merge(['category' => $category], $request->validated()));
 

@@ -20,13 +20,6 @@ class ProductData
         public readonly int $stockQuantity,
         public readonly string $status,
         public readonly ?string $publishedAt,
-        // public readonly ?int $dailyRate,
-        // public readonly ?int $weeklyRate,
-        // public readonly ?int $monthlyRate,
-        // public readonly ?int $buyPrice,
-        // public readonly ?string $currency,
-        // public readonly ?string $validFrom,
-        // public readonly ?string $validTo,
     ) {
         //
     }
@@ -42,13 +35,6 @@ class ProductData
             stockQuantity: $validated['stockQuantity'] ?? 1,
             status: $validated['status'] ?? ProductStatus::DRAFT->value,
             publishedAt: $validated['publishedAt'] ?? null,
-            // dailyRate: $validated['dailyRate'] ?? null,
-            // weeklyRate: $validated['weeklyRate'] ?? null,
-            // monthlyRate: $validated['monthlyRate'] ?? null,
-            // buyPrice: $validated['buyPrice'] ?? null,
-            // currency: $validated['currency'] ?? null,
-            // validFrom: $validated['validFrom'] ?? null,
-            // validTo: $validated['validTo'] ?? null,
         );
     }
 }

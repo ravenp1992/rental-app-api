@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\Api\CategoryController;
-use App\Http\Controllers\Api\CategorySubcategoryController;
+use App\Http\Controllers\Api\PriceController;
 use App\Http\Controllers\Api\PricePlanController;
 use App\Http\Controllers\Api\ProductController;
-use App\Http\Controllers\Api\ProductPriceController;
+use App\Http\Controllers\Api\SubcategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->group(function () {
     /* categories */
     Route::apiResource('categories', CategoryController::class)->except(['index']);
     /* subcategories */
-    route::apiResource('/categories/{category}/subcategories', CategorySubcategoryController::class)->names([
+    route::apiResource('/categories/{category}/subcategories', SubcategoryController::class)->names([
         'store' => 'categories.subcategories.store',
         'update' => 'categories.subcategories.update',
     ])->only(['store', 'update']);
@@ -34,7 +34,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('products', ProductController::class)->except(['index']);
     Route::post('/products/{product}/publish', [ProductController::class, 'publish'])->name('products.publish');
     /* prices */
-    Route::apiResource('/products/{product}/prices', ProductPriceController::class)->names([
+    Route::apiResource('/products/{product}/prices', PriceController::class)->names([
         'index' => 'products.prices.index',
         'store' => 'products.prices.store',
         'update' => 'products.prices.update',
