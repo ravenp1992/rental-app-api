@@ -8,22 +8,37 @@ jobs:
   tests:
     runs-on: ubuntu-latest
 
+    services:
+      mysql:
+        image: mysql:8
+        env:
+          MYSQL_DATABASE: rental_app
+          MYSQL_USERNAME: root
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping"
+
     steps:
       - name: Setup PHP with PECL extension
       - uses: shivammathur/setup-php@v2
         with:
           php-version: "8.3"
           extensions: imagick, swoole
+
       - uses: actions/checkout@v3
+
       - name: Copy .env
         run: cp .env.ci .env
+
       - name: Install dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress
+
       - name: Generate key
         run: php artisan generate:key
+
       - name: Directory Permissions
         run: chmod -R 777 storage bootstrap/cache
-      - name: Run Test
+
+      - name: Run Tests
         run: php artisan test
-      # - name: phpstan
-      #   run: ./vendor/bin/phpstan analyse --memory-limit=1G
