@@ -24,17 +24,17 @@ class ProductData
         //
     }
 
-    public static function fromArray(array $validated): self
+    public static function fromArray(array $data): self
     {
         return new static(
-            owner: User::where('uuid', $validated['userId'])->firstOrFail(),
-            category: Category::where('uuid', $validated['categoryId'])->firstOrFail(),
-            name: $validated['name'],
-            description: $validated['description'],
-            deposit: $validated['deposit'] ?? 0,
-            stockQuantity: $validated['stockQuantity'] ?? 1,
-            status: $validated['status'] ?? ProductStatus::DRAFT->value,
-            publishedAt: $validated['publishedAt'] ?? null,
+            owner: User::where('uuid', $data['userId'])->firstOrFail(),
+            category: Category::where('uuid', $data['categoryId'])->firstOrFail(),
+            name: $data['name'],
+            description: $data['description'],
+            deposit: $data['deposit'] ?? 0,
+            stockQuantity: $data['stockQuantity'] ?? 1,
+            status: $data['status'] ?? ProductStatus::DRAFT->value,
+            publishedAt: $data['publishedAt'] ?? null,
         );
     }
 }
