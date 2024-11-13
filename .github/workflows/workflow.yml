@@ -9,17 +9,6 @@ jobs:
   tests:
     runs-on: ubuntu-latest
 
-    services:
-      mysql:
-        image: mysql:8
-        env:
-          MYSQL_DATABASE: rental_app
-          MYSQL_USERNAME: root
-          MYSQL_ROOT_PASSWORD: root
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping"
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
