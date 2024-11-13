@@ -2,7 +2,8 @@ name: First pipline
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - main
 
 jobs:
   tests:
@@ -20,13 +21,13 @@ jobs:
         options: --health-cmd="mysqladmin ping"
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Setup PHP with PECL extension
         uses: shivammathur/setup-php@v2
         with:
           php-version: "8.3"
-          extensions: imagick, swoole
 
       - name: Copy .env
         run: cp .env.ci .env
@@ -40,5 +41,13 @@ jobs:
       - name: Directory Permissions
         run: chmod -R 777 storage bootstrap/cache
 
+      - name: Create Database
+        run: |
+          mkdir -p database
+          touch database/database.sqlite
+
       - name: Run Tests
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: database/database.sqlite
         run: php artisan test
